@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yukta Chavan | Data Analyst Portfolio</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS CSS (animations) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+  <style>
+    /* Smooth scroll + keep anchors visible under fixed navbar */
+    html { scroll-behavior:smooth; }
+    #hero, #about, #skills, #expertise, #experience, #projects, #education, #contact { scroll-margin-top: 90px; }
+/* vertical stack for an icon above the pill */
+.skill {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+}
+
+    /* Global font */
+    * { font-family: "Times New Roman", Times, serif; }
+
+    /* Dark palette */
+    :root{
+      --bg: #0b0b0b;   /* page background */
+      --text: #ffffff; /* main text */
+      --muted: #1f2937;/* separators/cards */
+      --accent: #60a5fa;  /* blue accent */
+      --accent-2: #3b82f6;/* darker blue (hover) */
+    }
+
+    body{ background:var(--bg); color:var(--text); }
+
+    /* Links */
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ color:var(--accent-2); text-decoration:underline; }
+
+    /* Section separation so content never "merges" */
+    .section{
+      padding-top:4rem; padding-bottom:4rem;
+      border-top:1px solid var(--muted);
+    }
+
+    /* Headings */
+    .h-title{ color:var(--accent); }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+      padding:.75rem 1.1rem; border-radius:.6rem; font-weight:700;
+      border:1px solid var(--accent); color:var(--accent);
+      transition: all .15s ease;
+      text-decoration:none;
+    }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 10px 20px rgba(96,165,250,.15); }
+    .btn-solid{ background:var(--accent); color:#0b0b0b; border-color:transparent; }
+    .btn-solid:hover{ background:var(--accent-2); color:#0b0b0b; }
+
+    /* Chips (skills/tags) */
+    .chip{
+      display:inline-block; padding:.35rem .8rem; border-radius:999px;
+      border:1px solid var(--muted); color:#e5e7eb; font-weight:600;
+      background:rgba(31,41,55,.35);
+    }
+
+    /* Simple card */
+    .card{
+      background:#111318; border:1px solid var(--muted); border-radius:1rem;
+    }
+
+    /* Fixed navbar blur */
+    .nav-blur{ backdrop-filter: blur(8px); background:rgba(0,0,0,.7); }
+
+    /* Small helpers for custom classes you used */
+    .bg-primary   { background:#3b82f6; }     /* blue */
+    .text-primary { color:#60a5fa; }          /* light blue text */
+    .bg-dark      { background:#0f1115; }     /* dark card bg */
+    .gradient-text{
+      background: linear-gradient(90deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    /* Typewriter cursor */
+    #cursor { display:inline-block; margin-left:2px; animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity:0; } }
+/* Wallpaper only on HERO and ABOUT */
+#hero,
+#about {
+  position: relative;
+  background:
+    linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)),
+    url("./assets/hero-wallpaper.jpg") center / cover no-repeat;
+}
+
+/* Keep divider visible for SKILLS & EXPERTISE; hide only for ABOUT */
+#about.section { border-top-color: transparent; }
+
+@media (min-width: 1024px) {
+  #hero, #about { background-attachment: fixed; }
+}
+@media (max-width: 1023px) {
+  #hero, #about { background-attachment: scroll; }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 inset-x-0 nav-blur z-50 border-b border-[var(--muted)]">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="text-xl font-bold tracking-wide h-title">YUKTA CHAVAN</a>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#hero">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#skills">Skills &amp; Expertise</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact"
+         class="ml-4 inline-flex items-center rounded-xl bg-blue-500 hover:bg-blue-600 px-5 py-2 font-semibold text-black shadow-lg">
+        Hire Me
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="hero" class="pt-28 pb-16">
+    <div class="max-w-6xl mx-auto px-6 grid gap-10 md:grid-cols-2 items-center">
+      <!-- LEFT: photo -->
+      <div class="flex justify-center md:justify-start" data-aos="fade-right">
+        <div class="relative">
+          <img src="./assets/profile.jpg" alt="Yukta Chavan"
+               class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover object-center ring-4 ring-indigo-500/40 shadow-2xl"
+               decoding="async" loading="eager"/>
+          <span class="absolute -inset-1 rounded-full bg-gradient-to-tr from-indigo-500/30 to-yellow-500/30 blur-lg -z-10"></span>
+        </div>
+      </div>
+
+      <!-- RIGHT: text + buttons -->
+      <div class="text-center md:text-left" data-aos="fade-left" data-aos-delay="100">
+        <p class="text-lg text-gray-300">HELLO!</p>
+        <h1 class="mt-2 text-5xl md:text-6xl font-bold leading-tight">
+          I'm <span class="text-indigo-300">Yukta Chavan</span>
+        </h1>
+        <p class="mt-5 text-xl md:text-2xl text-gray-300 leading-relaxed">
+          Data Analyst / Data Scientist —<br>
+          <span id="typed-text"></span><span id="cursor">|</span>
+        </p>
+        <div class="mt-8 flex flex-wrap md:justify-start justify-center gap-3">
+          <a href="https://www.linkedin.com/in/chavanyukta" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+          <a href="https://github.com/chavanyukta" target="_blank" rel="noopener" class="btn">GitHub</a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=chavanyukta@gmail.com&su=Hello%20Yukta&body=Hi%20Yukta,%0D%0A%0D%0A"
+             target="_blank" rel="noopener" class="btn" title="Open Gmail compose">Email address</a>
+          <a href="./assets/Yukta_Chavan_CV.pdf" class="btn btn-solid" download>Download CV</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="section" data-aos="fade-up">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 h-title">About</h2>
+      <p class="text-lg leading-relaxed text-gray-200">
+        Hi, I'm <strong>Yukta Chavan</strong> — a Master of Data Science graduate with 2 years of hands-on experience in
+        data analysis, financial reporting, data visualization, and stakeholder engagement. I turn complex datasets into
+        clear, actionable insights using <strong>Power BI</strong>, <strong>SQL</strong>, <strong>Excel</strong>,
+        <strong>Python</strong>, and <strong>R</strong>. I believe in teamwork, continuous learning, and staying
+        hands-on with evolving technologies.
+      </p>
+      <div class="mt-6 space-y-2 text-gray-200">
+        <p><strong>Profile:</strong> Data Science, Analytics &amp; Statistics</p>
+        <p><strong>Domain:</strong> Finance &amp; Banking, Retail, Healthcare</p>
+        <p><strong>Languages:</strong> English, Hindi, Marathi</p>
+      </div>
+    </div>
+  </section>
+
+<!-- SKILLS -->
+  <section id="skills" class="section" data-aos="fade-up">
+  <div class="grid gap-6 px-6 [grid-template-columns:repeat(auto-fit,minmax(160px,1fr))]" data-stagger>
+    <h2 class="col-span-full text-3xl md:text-4xl font-bold mb-6 h-title ml-4 md:ml-8">
+      Skills
+    </h2>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="bar-chart-2" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Power BI</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="database" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">SQL</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="file-text" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Microsoft Excel</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="pie-chart" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Tableau</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="aperture" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Qlik Sense</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="terminal" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">R</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="code" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">C</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="database" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">MySQL</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="database" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">PostgreSQL</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="github" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Git/GitHub</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="zap" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Power Automate</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="filter" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Power Query</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="repeat" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Macros</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="cpu" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Machine Learning</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="divide-circle" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Mathematics</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="trending-up" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Statistics</span>
+      </div>
+
+      <div class="skill" data-aos="fade-up">
+        <i data-feather="layers" class="w-5 h-5 text-[var(--accent)] opacity-90"></i>
+        <span class="chip">Deep Learning</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- EXPERTISE -->
+  <section id="expertise" class="section">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-10 h-title" data-aos="fade-up">Expertise</h2>
+      <div class="grid md:grid-cols-3 gap-6" data-stagger>
+        <div class="card p-6" data-aos="fade-up">
+          <h3 class="text-2xl font-semibold mb-3">Data Analyst</h3>
+          <p class="text-gray-300 leading-relaxed">
+            I build decision-grade analytics that teams actually use. I scope KPIs with stakeholders, design clean
+            data models, and deliver interactive dashboards with drilldowns, tooltip KPIs, and guided filters.
+            Toolset: <strong>Power BI (DAX/Power Query/Automate)</strong>, <strong>SQL</strong>, and <strong>Excel</strong>.
+          </p>
+          <ul class="mt-4 space-y-2 text-gray-300 list-disc ml-5">
+            <li><strong>Premier Development Group (Intern):</strong> Exec dashboards; Excel↔BI pipelines; workforce & cost trends.</li>
+            <li><strong>Yiros Plus (Contract):</strong> Inventory & profit analytics → ~<strong>28% margin uplift</strong>, ~<strong>70% waste reduction</strong>.</li>
+            <li><strong>Retail Financial Analysis:</strong> Sales/discount/margin with YoY comps and segment drilldowns.</li>
+          </ul>
+        </div>
+
+        <div class="card p-6" data-aos="fade-up">
+          <h3 class="text-2xl font-semibold mb-3">Data Scientist</h3>
+          <p class="text-gray-300 leading-relaxed">
+            Practical ML for measurable impact: focused EDA, careful features, cross-validation, and clear diagnostics.
+            Stack: <strong>Python</strong> (pandas, scikit-learn, TensorFlow/Keras), <strong>R</strong>, <strong>SQL</strong>.
+          </p>
+          <ul class="mt-4 space-y-2 text-gray-300 list-disc ml-5">
+            <li><strong>Breast Cancer Classification:</strong> SVM/KNN/DT with stratified CV; <strong>95% recall</strong> (AUC ≈ 0.97).</li>
+            <li><strong>Spotify Genre Prediction:</strong> LDA/KNN/Random Forest; best ≈ <strong>50.4%</strong> accuracy. <a href="https://github.com/chavanyukta/Spotify-Songs-Genre-Prediction" target="_blank" rel="noopener">Repo</a></li>
+            <li><strong>Ancient DNA Research (R):</strong> Mixed-effects/beta regression; clear report for non-technical readers.</li>
+          </ul>
+        </div>
+
+        <div class="card p-6" data-aos="fade-up">
+          <h3 class="text-2xl font-semibold mb-3">Excel Specialist</h3>
+          <p class="text-gray-300 leading-relaxed">
+            Fast, maintainable Excel systems for analysis & reporting—then automate the repetitive bits:
+            <strong>Power Query</strong>, <strong>PivotTables</strong>, and <strong>VBA/macros</strong>.
+          </p>
+          <ul class="mt-4 space-y-2 text-gray-300 list-disc ml-5">
+            <li><strong>PM Tool:</strong> Multi-project tracker with Gantt/Kanban/resource view.</li>
+            <li><strong>Ops Reporting:</strong> Macro-driven clean→reconcile→publish; ~<strong>30%</strong> analyst time saved.</li>
+            <li><strong>Handover:</strong> Docs & short training for self-serve refreshes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card p-6 mt-6" data-aos="fade-up">
+        <h4 class="text-xl font-semibold mb-3">How I Work</h4>
+        <ol class="list-decimal ml-6 space-y-2 text-gray-300">
+          <li><strong>Clarify:</strong> align on KPIs and decision-makers.</li>
+          <li><strong>Trust the data:</strong> clean, validate, model (SQL/Power Query).</li>
+          <li><strong>Build for decisions:</strong> DAX + drilldowns + tooltips.</li>
+          <li><strong>Explain:</strong> drivers, edge cases, trends.</li>
+          <li><strong>Ship & enable:</strong> docs + walkthrough + v2 feedback.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+ <!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold mb-8 h-title">Experience</h2>
+
+    <div class="space-y-6">
+
+      <!-- Premier Development Group -->
+      <div class="card p-6" data-aos="fade-up">
+        <!-- header -->
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <div class="flex items-center gap-3 min-w-0">
+            <i data-feather="briefcase" class="w-5 h-5 text-[var(--accent)] shrink-0"></i>
+            <h3 class="text-2xl font-semibold leading-tight">
+              Data Analyst Intern — Premier Development Group
+            </h3>
+          </div>
+          <img src="./assets/premier-dev-icon.jpg" alt="Premier Development Group"
+               class="h-10 w-10 md:h-12 md:w-12 object-contain opacity-90 shrink-0">
+        </div>
+
+        <!-- meta -->
+        <div class="mt-2 flex flex-wrap gap-4 text-gray-400 text-sm">
+          <span class="inline-flex items-center gap-1"><i data-feather="calendar" class="w-4 h-4"></i> Jan 2025 – Jun 2025</span>
+          <span class="inline-flex items-center gap-1"><i data-feather="map-pin" class="w-4 h-4"></i> Adelaide, Australia</span>
+          <span class="inline-flex items-center gap-1"><i data-feather="shuffle" class="w-4 h-4"></i> Hybrid</span>
+        </div>
+
+        <!-- bullets -->
+        <ul class="mt-4 space-y-2 text-gray-200">
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Excel PM app (Gantt, resources) to improve planning.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Power BI dashboards for leadership KPIs.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Excel macros &amp; DAX for forecasts, timelines, viability.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Stakeholder insights on workforce &amp; cost trends.</span></li>
+        </ul>
+      </div>
+
+      <!-- Siemens -->
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <div class="flex items-center gap-3 min-w-0">
+            <i data-feather="briefcase" class="w-5 h-5 text-[var(--accent)] shrink-0"></i>
+            <h3 class="text-2xl font-semibold leading-tight">Data Analyst Intern — Siemens</h3>
+          </div>
+          <img src="./assets/siemens-icon.jpg" alt="Siemens"
+               class="h-10 md:h-12 w-auto object-contain opacity-90 shrink-0">
+        </div>
+
+        <div class="mt-2 flex flex-wrap gap-4 text-gray-400 text-sm">
+          <span class="inline-flex items-center gap-1"><i data-feather="calendar" class="w-4 h-4"></i> Dec 2021 – May 2022</span>
+          <span class="inline-flex items-center gap-1"><i data-feather="map-pin" class="w-4 h-4"></i> Nashik, India</span>
+          <span class="inline-flex items-center gap-1"><i data-feather="home" class="w-4 h-4"></i> On-site</span>
+        </div>
+
+        <ul class="mt-4 space-y-2 text-gray-200">
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Pricing data cleaned &amp; modeled to identify cost-saving opportunities.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Excel dashboards &amp; automation → ~30% faster analysis.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Supply-chain workflow analysis for design &amp; procurement.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Validated operational data to reveal trends &amp; inefficiencies.</span></li>
+        </ul>
+      </div>
+
+      <!-- McDonald's -->
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <div class="flex items-center gap-3 min-w-0">
+            <i data-feather="briefcase" class="w-5 h-5 text-[var(--accent)] shrink-0"></i>
+            <h3 class="text-2xl font-semibold leading-tight">Shift Manager &amp; Customer Service Specialist — McDonald’s</h3>
+          </div>
+          <img src="./assets/macca.png" alt="McDonald's"
+               class="h-8 md:h-10 w-auto object-contain opacity-95 shrink-0">
+        </div>
+
+        <div class="mt-2 flex flex-wrap gap-4 text-gray-400 text-sm">
+          <span class="inline-flex items-center gap-1"><i data-feather="calendar" class="w-4 h-4"></i> Dec 2022 – Present</span>
+          <span class="inline-flex items-center gap-1"><i data-feather="map-pin" class="w-4 h-4"></i> Australia</span>
+          <span class="inline-flex items-center gap-1"><i data-feather="home" class="w-4 h-4"></i> On-site</span>
+        </div>
+
+        <ul class="mt-4 space-y-2 text-gray-200">
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Led shifts end-to-end—staffing, resources, and service quality.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Trained new team members on POS, SOPs, and customer care.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Cash counts, reconciliations, payroll entry, POS troubleshooting.</span></li>
+        </ul>
+      </div>
+
+      <!-- Yiros Plus -->
+      <div class="card p-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="flex items-center justify-between gap-4 flex-wrap">
+          <div class="flex items-center gap-3 min-w-0">
+            <i data-feather="briefcase" class="w-5 h-5 text-[var(--accent)] shrink-0"></i>
+            <h3 class="text-2xl font-semibold leading-tight">Crew Member (Contract) — Yiros Plus</h3>
+          </div>
+          <img src="./assets/yiros.jpg" alt="Yiros Plus"
+               class="h-8 md:h-10 w-auto object-contain opacity-95 shrink-0">
+        </div>
+
+        <div class="mt-2 flex flex-wrap gap-4 text-gray-400 text-sm">
+          <span class="inline-flex items-center gap-1"><i data-feather="calendar" class="w-4 h-4"></i> Apr 2024 – May 2024</span>
+          <span class="inline-flex items-center gap-1"><i data-feather="map-pin" class="w-4 h-4"></i> Adelaide, Australia</span>
+          <span class="inline-flex items-center gap-1"><i data-feather="shuffle" class="w-4 h-4"></i> Hybrid</span>
+        </div>
+
+        <ul class="mt-4 space-y-2 text-gray-200">
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Reconciled inventory &amp; sales data (PDF/Excel); improved data quality.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Built Power BI dashboards for inventory and profit analysis.</span></li>
+          <li class="flex items-start gap-2"><i data-feather="check-circle" class="w-4 h-4 text-[var(--accent)] mt-1 shrink-0"></i><span>Insights → ~28% margin uplift and ~70% waste reduction.</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 h-title text-center" data-aos="fade-up">Projects</h2>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+
+      <!-- Retail Financial Analysis -->
+      <a href="https://github.com/chavanyukta/powerbi-financial-analysis"
+         target="_blank" rel="noopener"
+         class="card overflow-hidden group" data-aos="fade-up">
+        <div class="relative h-44 md:h-48">
+          <img src="./assets/RFA.jpg" alt="Retail Financial Analysis"
+               class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <span class="chip absolute bottom-3 left-3">Power BI</span>
+        </div>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold">Retail Financial Analysis</h3>
+          <p class="text-gray-400 mt-2 text-sm">Sales, Orders, Profit, Margin &amp; Discounts with YoY KPIs.</p>
+        </div>
+      </a>
+
+      <!-- Global GDP Insights -->
+      <a href="https://github.com/chavanyukta/GDP-Trends-and-Analysis"
+         target="_blank" rel="noopener"
+         class="card overflow-hidden group" data-aos="fade-up">
+        <div class="relative h-44 md:h-48">
+          <img src="./assets/gdp.jpg" alt="Global GDP Insights (2013–2017)"
+               class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <span class="chip absolute bottom-3 left-3">SQL / Power BI</span>
+        </div>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold">Global GDP Insights (2013–2017)</h3>
+          <p class="text-gray-400 mt-2 text-sm">GDP &amp; GDP-per-capita trends across major economies.</p>
+        </div>
+      </a>
+
+      <!-- Ancient DNA Sequencing Methods -->
+      <a href="https://github.com/chavanyukta/Identifying-the-Performance-of-Ancient-DNA-Sequencing-Methods"
+         target="_blank" rel="noopener"
+         class="card overflow-hidden group" data-aos="fade-up">
+        <div class="relative h-44 md:h-48">
+          <img src="./assets/dna.jpg" alt="Ancient DNA Sequencing Methods"
+               class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <span class="chip absolute bottom-3 left-3">Research / R</span>
+        </div>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold">Ancient DNA Sequencing Methods</h3>
+          <p class="text-gray-400 mt-2 text-sm">Comparing Twist vs 1240k assays using statistical models.</p>
+        </div>
+      </a>
+
+      <!-- Breast Cancer Classification -->
+      <a href="https://github.com/chavanyukta/Breast-Cancer-Classification"
+         target="_blank" rel="noopener"
+         class="card overflow-hidden group" data-aos="fade-up">
+        <div class="relative h-44 md:h-48">
+          <img src="./assets/bcc.webp" alt="Breast Cancer Classification"
+               class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <span class="chip absolute bottom-3 left-3">Python / ML</span>
+        </div>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold">Breast Cancer Classification</h3>
+          <p class="text-gray-400 mt-2 text-sm">SVM/KNN/DT with cross-validation and model evaluation.</p>
+        </div>
+      </a>
+
+      <!-- Project Management Tool -->
+      <a href="https://github.com/chavanyukta/Project-management-tool"
+         target="_blank" rel="noopener"
+         class="card overflow-hidden group" data-aos="fade-up">
+        <div class="relative h-44 md:h-48">
+          <img src="./assets/pmt.png" alt="Project Management Tool"
+               class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <span class="chip absolute bottom-3 left-3">Excel</span>
+        </div>
+        <div class="p-5">
+          <h3 class="text-xl font-semibold">Project Management Tool</h3>
+          <p class="text-gray-400 mt-2 text-sm">Gantt timelines, dashboards, Kanban &amp; data validation.</p>
+        </div>
+      </a>
+<!-- More projects on GitHub -->
+<a href="https://github.com/chavanyukta?tab=repositories"
+   target="_blank" rel="noopener"
+   class="card overflow-hidden group" data-aos="fade-up">
+  <div class="relative h-44 md:h-48 flex items-center justify-center bg-gradient-to-tr from-[#0b0b0b] to-[#1f2937]">
+    <div class="rounded-full border border-[var(--muted)] p-4">
+      <i data-feather="github" class="w-10 h-10 text-gray-200"></i>
+    </div>
+    <span class="chip absolute bottom-3 left-3">GitHub</span>
+  </div>
+  <div class="p-5 text-center">
+    <h3 class="text-xl font-semibold">…and many more on GitHub</h3>
+    <p class="text-gray-400 mt-2 text-sm">Browse all repositories and notebooks.</p>
+  </div>
+</a>
+
+    </div>
+  </div>
+</section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="section">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 h-title" data-aos="fade-up">Education</h2>
+      <div class="grid md:grid-cols-2 gap-6" data-stagger>
+        <div class="card p-6" data-aos="fade-up">
+          <h3 class="text-2xl font-semibold">Master of Data Science — University of Adelaide</h3>
+          <p class="text-gray-400">Sep 2022 – Sep 2024</p>
+          <p class="mt-3 text-gray-200">
+            Python &amp; R, Deep Learning, Computer Science, Machine Learning,
+            Mathematics, Artificial Intelligence, Decision Science, Excel, Research Project, Data Taming, and more.
+          </p>
+        </div>
+        <div class="card p-6" data-aos="fade-up">
+          <h3 class="text-2xl font-semibold">Bachelor of Science (Statistics) — Pune University</h3>
+          <p class="text-gray-400">Jun 2018 – Jun 2021 · HPT Arts &amp; RYK Science College, Nashik</p>
+          <p class="mt-3 text-gray-200">
+            Statistical methods, probability, inference, sampling, quality control, and
+            programming with C &amp; R—applied in practical sessions and projects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications" class="section">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10 h-title" data-aos="fade-up">Certifications</h2>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+  
+  <!-- Coursera certificate -->
+  <a href="./assets/certificates/coursera-certificate.jpeg"
+   target="_blank" rel="noopener"
+   class="card overflow-hidden group" data-aos="fade-up">
+  <div class="relative h-44 md:h-48">
+    <img src="./assets/coursera-certificate.jpeg"
+         alt="Coursera Certificate — Databases and SQL for Data Science with Python"
+         class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+    <!-- chip with icon -->
+    <span class="chip absolute bottom-3 left-3 inline-flex items-center gap-1">
+      <i data-feather="award" class="w-4 h-4 text-[var(--accent)]"></i>
+      Coursera
+    </span>
+  </div>
+  <div class="p-5">
+    <h3 class="text-xl font-semibold">Databases and SQL for Data Science with Python</h3>
+    <p class="text-gray-400 mt-2 text-sm">Certificate</p>
+  </div>
+</a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT (with wallpaper) -->
+<section
+  id="contact"
+  class="relative py-20 bg-cover bg-center bg-no-repeat md:bg-fixed"
+  style="background-image:url('./assets/footer.jpg')"
+>
+  <!-- dark overlay -->
+  <div class="absolute inset-0 bg-black/70"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div data-aos="fade-up" class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4">Get In <span class="gradient-text">Touch</span></h2>
+        <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+        <p class="text-gray-400 max-w-3xl mx-auto">Feel free to reach out for roles, collaborations or questions.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- LEFT -->
+        <div data-aos="fade-right">
+          <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="bg-primary/10 p-3 rounded-full mr-4">
+                <i data-feather="mail" class="text-primary w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-white">Email</h4>
+                <p class="text-gray-400">
+                  <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=chavanyukta@gmail.com&su=Hello%20Yukta&body=Hi%20Yukta%2C%0A%0A"
+                     target="_blank" rel="noopener" class="hover:underline">chavanyukta@gmail.com</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="bg-primary/10 p-3 rounded-full mr-4">
+                <i data-feather="map-pin" class="text-primary w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-white">Location</h4>
+                <p class="text-gray-400">Australia</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="bg-primary/10 p-3 rounded-full mr-4">
+                <i data-feather="phone" class="text-primary w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-medium text-white">Phone</h4>
+                <p class="text-gray-400"><a href="tel:+61432395521" class="hover:underline">+61 0432 395 521</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 flex space-x-4">
+            <a href="https://github.com/chavanyukta" target="_blank" rel="noopener"
+               class="bg-gray-800 hover:bg-gray-700 p-3 rounded-full transition duration-300">
+              <i data-feather="github" class="text-gray-300 w-5 h-5"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/chavanyukta" target="_blank" rel="noopener"
+               class="bg-gray-800 hover:bg-gray-700 p-3 rounded-full transition duration-300">
+              <i data-feather="linkedin" class="text-gray-300 w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT: form -->
+        <div data-aos="fade-left">
+          <form class="bg-dark p-8 rounded-xl border border-gray-800">
+            <div class="mb-6">
+              <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+              <input id="name" type="text"
+                     class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white"
+                     placeholder="Your name">
+            </div>
+            <div class="mb-6">
+              <label for="email" class="block text-gray-300 mb-2">Your Email</label>
+              <input id="email" type="email"
+                     class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white"
+                     placeholder="you@example.com">
+            </div>
+            <div class="mb-6">
+              <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+              <input id="subject" type="text"
+                     class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white"
+                     placeholder="Project inquiry">
+            </div>
+            <div class="mb-6">
+              <label for="message" class="block text-gray-300 mb-2">Message</label>
+              <textarea id="message" rows="5"
+                        class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white"
+                        placeholder="Hello, I would like to talk about..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-primary hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPTS (load once, at the end) -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    // Feather icons
+    feather.replace();
+
+    // AOS animations
+    AOS.init({
+      duration: 700,
+      easing: 'ease-out-quart',
+      offset: 80,
+      once: true,
+      anchorPlacement: 'top-bottom'
+    });
+
+    // Auto-stagger children of any [data-stagger] container
+    document.querySelectorAll('[data-stagger]').forEach(container => {
+      [...container.children].forEach((el, i) => {
+        if (el.hasAttribute('data-aos')) {
+          el.setAttribute('data-aos-delay', String(i * 100));
+        }
+      });
+    });
+
+    // Typewriter effect
+    document.addEventListener('DOMContentLoaded', function () {
+      const text = "I turn data into decisions using Power BI, SQL, Python, and ML.";
+      const el = document.getElementById('typed-text');
+      const speed = 35;
+      let i = 0;
+      (function type() {
+        if (i < text.length) {
+          el.textContent += text.charAt(i++);
+          setTimeout(type, speed);
+        }
+      })();
+    });
+  </script>
+</body>
+</html>
